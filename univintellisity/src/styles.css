@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* icons */
+@import "assets/fonts/simple-line-icons/simple-line-icons.min.css";
+@import "assets/fonts/font-awesome/css/font-awesome.min.css";
+@import "assets/fonts/material-design-icons/material-icon.css";
+
+/* bootstrap */
+@import "assets/plugins/bootstrap/css/bootstrap.min.css";
+@import "assets/plugins/summernote/summernote.css";
+
+/* Material Design Lite CSS */
+@import "assets/plugins/material/material.min.css";
+@import "assets/css/material_style.css";
+
+/* inbox style */
+@import "assets/css/pages/inbox.min.css";
+
+/* Theme Styles */
+@import "assets/css/theme/light/theme_style.css";
+@import "assets/css/plugins.min.css";
+@import "assets/css/theme/light/style.css";
+@import "assets/css/responsive.css";
+@import "assets/css/theme/light/theme-color.css";
