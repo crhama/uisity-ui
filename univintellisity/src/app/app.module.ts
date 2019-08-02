@@ -7,6 +7,7 @@ import { LeftSidemenuComponent } from './maincomponents/left-sidemenu/left-sidem
 import { PageHeaderComponent } from './maincomponents/page-header/page-header.component';
 import { FooterComponent } from './maincomponents/footer/footer.component';
 import { ChatSidebarContainerComponent } from './maincomponents/chat-sidebar-container/chat-sidebar-container.component';
+import { StudentsModule } from './students/students.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ChatSidebarContainerComponent } from './maincomponents/chat-sidebar-con
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StudentsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -86,12 +86,12 @@
         <span class="title">Students</span><span class="arrow"></span></a>
       <ul class="sub-menu">
         <li class="nav-item">
-          <a href="all_students.html" class="nav-link "> <span class="title">All
+          <a [routerLink]="['students']" class="nav-link "> <span class="title">All
               Students</span>
           </a>
         </li>
         <li class="nav-item">
-          <a href="add_student.html" class="nav-link "> <span class="title">Add
+          <a [routerLink]="['students', 'add']" class="nav-link "> <span class="title">Add
               Student</span>
           </a>
         </li>
@@ -106,7 +106,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="student_profile.html" class="nav-link "> <span class="title">About
+          <a [routerLink]="['students', 'about']" class="nav-link "> <span class="title">About
               Student</span>
           </a>
         </li>
