@@ -27,7 +27,7 @@
                   <div class="row">
                     <div class="col-md-6 col-sm-6 col-6">
                       <div class="btn-group">
-                        <a href="add_professor.html" id="addRow"
+                        <a [routerLink]="['/students', 'add']" id="addRow"
                           class="btn btn-info">
                           Add New <i class="fa fa-plus"></i>
                         </a>
@@ -89,7 +89,7 @@
                               {{ std.email }} </a></td>
                           <td class="left">{{ std.admissionDate }}</td>
                           <td>
-                            <a href="edit_professor.html"
+                            <a [routerLink]="['/students', 'edit']"
                               class="btn btn-primary btn-xs">
                               <i class="fa fa-pencil"></i>
                             </a>
