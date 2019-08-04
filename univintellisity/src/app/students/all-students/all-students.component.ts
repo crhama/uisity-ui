@@ -4,6 +4,7 @@ import { Store, select } from '@ngrx/store';
 import * as stdVm from '../models/student-vm';
 import * as fromStudents from '../state/students.reducer'
 import { DataDisplayMode } from 'src/app/shared/models/enums';
+import * as studentsActions from "../state/students.action";
 
 
 @Component({
@@ -102,17 +103,13 @@ export class AllStudentsComponent implements OnInit {
         admissionDate: '22 Feb 2000',
     }
 ]
-  displayMode: DataDisplayMode.listView;
+  displayMode: DataDisplayMode;
   
   constructor(private store: Store<fromStudents.IState>) { }
 
   ngOnInit() {
-      this.store.pipe(select('students')).subscribe(
-        students => {
-            if(students){
-                this.displayMode = students.dataDisplayMode;
-            }
-        }
+      this.store.pipe(select(fromStudents.getDataDisplayMode)).subscribe(
+        dataDisplayMode => this.displayMode = dataDisplayMode
       );
   }
 
@@ -121,10 +118,7 @@ export class AllStudentsComponent implements OnInit {
         ? DataDisplayMode.listView 
         : DataDisplayMode.gridView;
 
-    this.store.dispatch({
-        type: 'TOGGLE_ALLSTUDENTS_DISPLAYMODE',
-        payload: payload
-    });
+    this.store.dispatch(new studentsActions.ToggleAllStudentsDisplayMode(payload));
   }
 
 }
