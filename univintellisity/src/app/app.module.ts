@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
+import { StoreModule } from "@ngrx/store";
+
 import { AppComponent } from './app.component';
 import { LeftSidemenuComponent } from './maincomponents/left-sidemenu/left-sidemenu.component';
 import { PageHeaderComponent } from './maincomponents/page-header/page-header.component';
 import { FooterComponent } from './maincomponents/footer/footer.component';
 import { ChatSidebarContainerComponent } from './maincomponents/chat-sidebar-container/chat-sidebar-container.component';
 import { StudentsModule } from './students/students.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { StudentsModule } from './students/students.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StudentsModule
+    StoreModule.forRoot({}),
+    StudentsModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

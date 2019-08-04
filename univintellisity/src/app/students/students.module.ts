@@ -4,6 +4,8 @@ import { AllStudentsComponent } from './all-students/all-students.component';
 import { AboutStudentComponent } from './about-student/about-student.component';
 import { RouterModule } from '@angular/router';
 import { EditStudentComponent } from './edit-student/edit-student.component';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './state/students.reducer';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,8 @@ import { EditStudentComponent } from './edit-student/edit-student.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    StoreModule.forFeature('students', reducer)
   ]
 })
 export class StudentsModule { }

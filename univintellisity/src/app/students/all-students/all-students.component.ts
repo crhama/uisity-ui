@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+
 import * as stdVm from '../models/student-vm';
+import * as fromStudents from '../state/students.reducer'
+import { DataDisplayMode } from 'src/app/shared/models/enums';
+
 
 @Component({
   selector: 'app-all-students',
@@ -97,10 +102,29 @@ export class AllStudentsComponent implements OnInit {
         admissionDate: '22 Feb 2000',
     }
 ]
+  displayMode: DataDisplayMode.listView;
   
-  constructor() { }
+  constructor(private store: Store<fromStudents.IState>) { }
 
   ngOnInit() {
+      this.store.pipe(select('students')).subscribe(
+        students => {
+            if(students){
+                this.displayMode = students.dataDisplayMode;
+            }
+        }
+      );
+  }
+
+  switchTab(tab: string){    
+    const payload = (tab === 'tab1') 
+        ? DataDisplayMode.listView 
+        : DataDisplayMode.gridView;
+
+    this.store.dispatch({
+        type: 'TOGGLE_ALLSTUDENTS_DISPLAYMODE',
+        payload: payload
+    });
   }
 
 }
