@@ -6,6 +6,8 @@ import { RouterModule } from '@angular/router';
 import { EditStudentComponent } from './edit-student/edit-student.component';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from './state/students.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { StudentsEffects } from './state/students.effects';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { reducer } from './state/students.reducer';
   imports: [
     CommonModule,
     RouterModule,
-    StoreModule.forFeature('students', reducer)
+    StoreModule.forFeature('students', reducer),
+    EffectsModule.forFeature([StudentsEffects]),
   ]
 })
 export class StudentsModule { }
