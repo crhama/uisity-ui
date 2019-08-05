@@ -3,8 +3,9 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 
 import { StudentsService } from '../students.service';
 import * as studentsActions from "../state/students.action";
-import { mergeMap, map } from 'rxjs/operators';
+import { mergeMap, map, catchError } from 'rxjs/operators';
 import * as stdVm from '../models/student-vm';
+import { of } from 'rxjs';
 
 
 @Injectable()
@@ -19,7 +20,8 @@ export class StudentsEffects {
         mergeMap((action: studentsActions.LoadAllStudents) =>
             this.studentsService.getStudents().pipe(
                 map((students: stdVm.StudentViewModel[]) =>
-                    (new studentsActions.LoadAllStudentsSuccess(students)))
+                    (new studentsActions.LoadAllStudentsSuccess(students))),
+                catchError(err => of(new studentsActions.LoadAllStudentsFail(err)))
             )
         )
     );

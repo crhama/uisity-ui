@@ -9,38 +9,40 @@ export interface IState extends fromRoot.IState {
 }
 
 export interface IStudentsState {
-    dataDisplayMode: DataDisplayMode;
     allStudents: stdVm.StudentViewModel[];
+    error: string;
 }
 
 const getAllStudentsFeatureState = createFeatureSelector<IStudentsState>('students');
-
-export const getDataDisplayMode = createSelector(
-    getAllStudentsFeatureState,
-    state => state.dataDisplayMode
-);
 
 export const getAllStudents = createSelector(
     getAllStudentsFeatureState,
     state => state.allStudents
 );
 
+export const getError = createSelector(
+    getAllStudentsFeatureState,
+    state => state.error
+);
+
 const initialState: IStudentsState = {
-    dataDisplayMode: DataDisplayMode.listView,
-    allStudents: []
+    allStudents: [],
+    error: ''
 }
 
 export function reducer(state = initialState, action: StudentsActions): IStudentsState {
     switch (action.type) {
-        case StudentsActionTypes.ToggleAllStudentsDisplayMode:
-            return {
-                ...state,
-                dataDisplayMode: action.payload
-            }
         case StudentsActionTypes.LoadAllStudentsSuccess:
             return {
                 ...state,
-                allStudents: action.payload
+                allStudents: action.payload,
+                error: ''
+            }
+        case StudentsActionTypes.LoadAllStudentsFail:
+            return {
+                ...state,
+                allStudents: [],
+                error: action.payload
             }
         default:
             return state;

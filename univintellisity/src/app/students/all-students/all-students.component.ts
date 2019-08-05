@@ -16,18 +16,14 @@ import * as studentsActions from "../state/students.action";
 })
 export class AllStudentsComponent implements OnInit {
   studentList$: Observable<stdVm.StudentViewModel[]>;
-  displayMode: DataDisplayMode;
+  errorMessage$: Observable<string>;
   
   constructor(private store: Store<fromStudents.IState>) { }
 
   ngOnInit() {
       this.store.dispatch(new studentsActions.LoadAllStudents());
       this.studentList$ = this.store.pipe(select(fromStudents.getAllStudents));
-
-
-      this.store.pipe(select(fromStudents.getDataDisplayMode)).subscribe(
-        dataDisplayMode => this.displayMode = dataDisplayMode
-      );
+      this.errorMessage$ = this.store.pipe(select(fromStudents.getError));
   }
 
   switchTab(tab: string){    
