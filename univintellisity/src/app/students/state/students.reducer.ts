@@ -31,7 +31,6 @@ const initialState: IStudentsState = {
 }
 
 export function reducer(state = initialState, action: StudentsActions): IStudentsState {
-    console.log(JSON.stringify(state));
     switch (action.type) {
         case StudentsActionTypes.ToggleAllStudentsDisplayMode:
             return {
