@@ -77,7 +77,7 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let std of studentList" class="odd gradeX">
+                        <tr *ngFor="let std of studentList$ | async" class="odd gradeX">
                           <td class="patient-img">
                             <img src="../assets/img/std/std1.jpg"
                               alt="">
