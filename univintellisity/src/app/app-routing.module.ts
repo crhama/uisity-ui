@@ -7,7 +7,7 @@ import { EditStudentComponent } from './students/edit-student/edit-student.compo
 const routes: Routes = [
   { path: 'students', component: AllStudentsComponent },
   { path: 'students/add', component: EditStudentComponent },
-  { path: 'students/edit', component: EditStudentComponent },
+  { path: 'students/:id/edit', component: EditStudentComponent },
   { path: 'students/about', component: AboutStudentComponent }
 ];
 

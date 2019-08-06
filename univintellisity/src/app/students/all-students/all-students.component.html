@@ -73,7 +73,7 @@
                         {{ std.email }} </a></td>
                     <td class="left">{{ std.admissionDate }}</td>
                     <td>
-                      <a [routerLink]="['/students', 'edit']" class="btn btn-primary btn-xs">
+                      <a [routerLink]="['/students', std.id, 'edit']" class="btn btn-primary btn-xs">
                         <i class="fa fa-pencil"></i>
                       </a>
                       <button class="btn btn-danger btn-xs">

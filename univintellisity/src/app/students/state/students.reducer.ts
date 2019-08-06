@@ -10,6 +10,7 @@ export interface IState extends fromRoot.IState {
 
 export interface IStudentsState {
     allStudents: stdVm.StudentViewModel[];
+    studentToEditId: string;
     error: string;
 }
 
@@ -20,6 +21,18 @@ export const getAllStudents = createSelector(
     state => state.allStudents
 );
 
+export const getStudentToEditId = createSelector(
+    getAllStudentsFeatureState,
+    state => state.studentToEditId
+);
+
+export const getLoadedStudentToEdit = createSelector(
+    getAllStudentsFeatureState,
+    getStudentToEditId,
+    (state, getStudentToEditId) => 
+        state.allStudents.find(s => s.id === getStudentToEditId)
+);
+
 export const getError = createSelector(
     getAllStudentsFeatureState,
     state => state.error
@@ -27,6 +40,7 @@ export const getError = createSelector(
 
 const initialState: IStudentsState = {
     allStudents: [],
+    studentToEditId: '',
     error: ''
 }
 
@@ -43,6 +57,11 @@ export function reducer(state = initialState, action: StudentsActions): IStudent
                 ...state,
                 allStudents: [],
                 error: action.payload
+            }
+        case StudentsActionTypes.LoadStudentToEdit:
+            return {
+                ...state,
+                studentToEditId: action.payload
             }
         default:
             return state;

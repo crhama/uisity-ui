@@ -7,7 +7,9 @@ export enum StudentsActionTypes {
     ToggleAllStudentsDisplayMode = '[Students] Toggle All Students Display Mode',
     LoadAllStudents = '[Students] Load all students from backend service',
     LoadAllStudentsSuccess = '[Students] Load all students from backend service Success',
-    LoadAllStudentsFail = '[Students] Load all students from backend service Fails'
+    LoadAllStudentsFail = '[Students] Load all students from backend service Fails',
+
+    LoadStudentToEdit = '[Students] Load selected student to edit'
 }
 
 export class ToggleAllStudentsDisplayMode implements Action {
@@ -29,7 +31,13 @@ export class LoadAllStudentsFail implements Action {
     constructor(public payload: string) {}
 }
 
+export class LoadStudentToEdit implements Action {
+    readonly type = StudentsActionTypes.LoadStudentToEdit;
+    constructor(public payload: string) {}
+}
+
 export type StudentsActions = ToggleAllStudentsDisplayMode
     | LoadAllStudents
     | LoadAllStudentsSuccess
-    | LoadAllStudentsFail;
+    | LoadAllStudentsFail
+    | LoadStudentToEdit;
