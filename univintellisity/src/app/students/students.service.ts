@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
@@ -8,14 +8,25 @@ import * as stdVm from '../students/models/student-vm';
 
 @Injectable({ providedIn: 'root' })
 export class StudentsService {
-    studentsUrl = 'http://localhost:58709/api/students';
+    studentsUrl = 'http://localhost:58709/api/';
 
     constructor(private http: HttpClient) { }
 
     getStudents(): Observable<stdVm.StudentViewModel[]> {
-        return this.http.get<stdVm.StudentViewModel[]>(this.studentsUrl)
+        return this.http.get<stdVm.StudentViewModel[]>(this.studentsUrl + 'students')
             .pipe(
                 tap(data => console.log(JSON.stringify(data))),
+                catchError(this.handleError)
+            );
+    }
+
+    AddNewStudent(std: stdVm.StudentViewModel) {
+        std.id = null;
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        
+        return this.http.post<stdVm.StudentViewModel>(this.studentsUrl + 'students', std, { headers: headers })
+            .pipe(
+                tap(data => console.log('createProduct: ' + JSON.stringify(data))),
                 catchError(this.handleError)
             );
     }

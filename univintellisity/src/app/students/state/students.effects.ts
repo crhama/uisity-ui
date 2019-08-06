@@ -25,4 +25,15 @@ export class StudentsEffects {
       )
     )
   );
+
+  @Effect()
+    loadAllStudent$: Observable<Action> = this.actions$.pipe(
+    ofType(studentsActions.StudentsActionTypes.AddNewStudent),
+    mergeMap((action: studentsActions.AddNewStudent) =>
+        this.studentsService.AddNewStudent(action.payload).pipe(
+        map(success => (new studentsActions.SaveStudentSuccess())),
+        catchError(err => of(new studentsActions.LoadAllStudentsFail(err)))
+      )
+    )
+  );
 }

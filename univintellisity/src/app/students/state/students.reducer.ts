@@ -11,6 +11,7 @@ export interface IState extends fromRoot.IState {
 export interface IStudentsState {
     allStudents: stdVm.StudentViewModel[];
     studentToEditId: string;
+    saveStudentSucceeded: boolean;
     error: string;
 }
 
@@ -29,8 +30,15 @@ export const getStudentToEditId = createSelector(
 export const getLoadedStudentToEdit = createSelector(
     getAllStudentsFeatureState,
     getStudentToEditId,
-    (state, getStudentToEditId) => 
-        state.allStudents.find(s => s.id === getStudentToEditId)
+    (state, getStudentToEditId) => {
+        const std = state.allStudents.find(s => s.id === getStudentToEditId);
+        return (!!std) ? std : initializeStudentToEdit();
+    }
+);
+
+export const getSaveStudentSucceeded = createSelector(
+    getAllStudentsFeatureState,
+    state => state.saveStudentSucceeded
 );
 
 export const getError = createSelector(
@@ -41,6 +49,7 @@ export const getError = createSelector(
 const initialState: IStudentsState = {
     allStudents: [],
     studentToEditId: '',
+    saveStudentSucceeded: false,
     error: ''
 }
 
@@ -63,7 +72,28 @@ export function reducer(state = initialState, action: StudentsActions): IStudent
                 ...state,
                 studentToEditId: action.payload
             }
+        case StudentsActionTypes.SaveNewStudentSuccess:
+            return {
+                ...state,
+                saveStudentSucceeded: true
+            }
         default:
             return state;
+    }
+}
+
+/* Helpers */
+function initializeStudentToEdit(): stdVm.StudentViewModel {
+    return {
+        id: '0',
+        firstName: '',
+        middleName: '',
+        lastName: '',
+        gender: stdVm.Gender.Female,
+        departmentId: '',
+        departmentName: '',
+        mobile: '',
+        email: '',
+        admissionDate: ''
     }
 }

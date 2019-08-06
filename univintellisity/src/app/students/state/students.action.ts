@@ -9,7 +9,10 @@ export enum StudentsActionTypes {
     LoadAllStudentsSuccess = '[Students] Load all students from backend service Success',
     LoadAllStudentsFail = '[Students] Load all students from backend service Fails',
 
-    LoadStudentToEdit = '[Students] Load selected student to edit'
+    LoadStudentToEdit = '[Students] Load selected student to edit',
+    AddNewStudent = '[Students] Save new student to the backend',
+    UpdateExistingStudent = '[Students] Save changes made to an existing student record to the backend',
+    SaveNewStudentSuccess = '[Students] Add New student succeded'
 }
 
 export class ToggleAllStudentsDisplayMode implements Action {
@@ -36,8 +39,25 @@ export class LoadStudentToEdit implements Action {
     constructor(public payload: string) {}
 }
 
+export class AddNewStudent implements Action {
+    readonly type = StudentsActionTypes.AddNewStudent;
+    constructor(public payload: stdVm.StudentViewModel) {}
+}
+
+export class UpdateExistingStudent implements Action {
+    readonly type = StudentsActionTypes.UpdateExistingStudent;
+    constructor(public payload: stdVm.StudentViewModel) {}
+}
+
+export class SaveStudentSuccess implements Action {
+    readonly type = StudentsActionTypes.SaveNewStudentSuccess;
+}
+
 export type StudentsActions = ToggleAllStudentsDisplayMode
     | LoadAllStudents
     | LoadAllStudentsSuccess
     | LoadAllStudentsFail
-    | LoadStudentToEdit;
+    | LoadStudentToEdit
+    | AddNewStudent
+    | UpdateExistingStudent
+    | SaveStudentSuccess;
